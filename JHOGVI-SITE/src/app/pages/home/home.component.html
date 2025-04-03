@@ -1,0 +1,35 @@
+<div class="home__container" >
+	<div class="home_buttons">
+		<!-- Botões de escolha de boné -->
+		<button *ngFor="let produto of produtos"
+			(click)="selecionarBone(produto)"
+			[ngStyle]="{'background-color': produto.cor.toLowerCase()}"
+		>{{ produto.cor }}</button>
+	</div>
+
+	  <!-- Exibição do boné com base na seleção -->
+	<app-left *ngIf="selectedBone"
+		[imgMockups]="selectedBone.imagens"
+		[backgroundImage]="'assets/plataforma_digital.jpg'">
+	</app-left>
+
+	<app-right *ngIf="selectedBone"
+				[imgBack]="imgBack"
+				[titulo]="selectedBone.titulo"
+				[descricao]="selectedBone.descricao"
+				[detalhes]="selectedBone.detalhes">
+	</app-right>
+
+	<!-- <div *ngFor="let produto of produtos"> -->
+		<!-- <app-left [imgMockups]="produto.imagens"/>
+		<app-right
+			[imgBack]='imgBack'
+			[titulo]='produto.titulo'
+			[descricao]='produto.descricao'
+			[detalhes]='produto.detalhes'
+		/>
+		</div> -->
+</div>
+<div class="info_aditionals">
+	<div></div>
+</div>

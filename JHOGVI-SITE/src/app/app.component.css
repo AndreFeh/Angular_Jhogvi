@@ -1,0 +1,14 @@
+app-menu-bar{
+	position: static; /* Inicialmente estático */
+	width: 100%; /* Para garantir que o menu ocupe toda a largura */
+	z-index: 999; /* Certifique-se de que o menu sobreponha outros elementos */
+	background-color: transparent; /* Cor de fundo para visibilidade */
+	/* transition: top 0.3s ease-in-out; Suaviza a transição quando o menu se torna fixo */
+  }
+
+app-menu-bar.fixed {
+	position: fixed; /* Quando rolar a página, o menu fica fixo */
+	top: 0; /* Fixa no topo da página */
+	left: 0; /* Fixa no lado esquerdo */
+	right: 0; /* Fixa no lado direito */
+  }
