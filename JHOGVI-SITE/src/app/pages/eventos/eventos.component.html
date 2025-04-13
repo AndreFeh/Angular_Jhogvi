@@ -1,1 +1,31 @@
-<p>eventos works!</p>
+
+<div class="eventos__container">
+	<div class="events_filter">
+		<app-filter
+			[tituloNome]="'Nome do Evento'"
+			[tituloTipo]="'Tipo do Evento'"
+			[opcoesCat]="opcoesCategorias"
+			tituloLocalidade="Localização"
+			[opcoesLocal]="opcoesLocalidades"
+			(filtrar)="aplicarFiltros($event)"
+			(limpar)="limparFiltros()"
+		></app-filter>
+	</div>
+	<div class="events_cards" *ngIf="eventosFiltrados.length !== 0">
+		<h1>Eventos</h1>
+		<app-card-event *ngFor="let event of eventosFiltrados"
+		[id]="event.id"
+		[title]="event.titulo"
+		[subcategoria]="event.subcategoria"
+		[local]="event.local"
+		[city]="event.localidade"
+		[street]="event.endereco"
+		[date]="event.data"
+		[price]="event.entrada"
+
+		/>
+	</div>
+	<div *ngIf="eventosFiltrados.length === 0">
+		<p>Nenhum resultado encontrado.</p>
+	</div>
+</div>

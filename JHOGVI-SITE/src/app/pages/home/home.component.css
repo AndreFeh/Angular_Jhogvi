@@ -1,50 +1,86 @@
+app-left, app-right{
+	min-width: 49.98vw;
+	margin: 0;
+	padding: 0;
+}
+
 .home__container {
 	width: 100%;
-	min-height: 80vh;
+	min-height: 79vh;
 	display: flex;
-
-	flex-direction: row;
-	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
-	flex-wrap: nowrap;
-	overflow: hidden;
-  }
+	box-sizing: border-box;
+}
 
-  .home_buttons {
-	position: absolute; /* Para posicionar os botões na parte inferior */
-	display: flex;
-	flex-direction: row;
-	justify-content: center; /* Centraliza os botões */
-	gap: 10px; /* Espaçamento entre os botões */
-	flex-wrap: wrap; /* Permite que os botões se quebrem para a linha seguinte se necessário */
-	z-index: 3;
-	left: 10%; /* Fixa os botões à esquerda */
-	bottom: 2%; /* Distância da parte inferior da tela */
-  }
+.content {
 
-  .home_buttons button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+display: flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: space-between;
+align-items: flex-start;
+width: 100%;
+}
 
-	width: 80px; /* A metade da largura da tela */
-	height: 30px; /* A metade da largura da tela */
+.content > div {
 
-	font-size: 14px; /* Tamanho de texto pequeno */
-	border: none; /* Remove borda */
-	border-radius: 5px; /* Bordas arredondadas */
-	cursor: pointer; /* Cursor de clique */
-	opacity: 0.6; /* Opacidade inicial */
-	box-shadow: 2px 2px 4px whitesmoke; /* Sombra leve para destaque */
-  }
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+/* width: 49vw; ou 49vw, se quiser deixar metade da tela */
+box-sizing: border-box;
+overflow: hidden;
+}
 
-  .home_buttons button:hover {
-	opacity: 1; /* Opacidade total quando passar o mouse */
-	transform: scale(1.05); /* Aumenta o botão ligeiramente ao passar o mouse */
-  }
+.bone_filter {
 
-  .home_buttons button:focus {
-	outline: none; /* Remove a borda de foco padrão */
-	box-shadow: 0 0 5px 2px rgba(0, 188, 119, 0.5); /* Destaque azul quando focado */
-  }
+position: absolute;
+left: 0;
+gap: 10px;
+width: 250px;
+margin-top: 10vh;
+z-index: 5;
+display: flex;
+flex-direction:row;
+flex-wrap: wrap;
+justify-content: center; /* centraliza os botões */
+background-color: transparent;
+}
 
+.bone_filter button{
+width: 80px;
+height: 80px;
+padding: 5px;
+/* font-size: 14px; */
+border-radius: 5px;
+cursor: pointer;
+opacity: 0.6;
+background-color: black;
+/* box-shadow: 0px 0px 0px 2px rgb(0, 0, 0); */
+transition: all 0.2s ease-in-out;
+box-shadow: 0 2px 6px rgba(0, 255, 42, 0.9);
+}
+
+.bone_filter button>img{
+width: 100%;
+height: 100%;
+object-fit: fill;
+}
+
+
+.bone_filter button:hover {
+opacity: 1;
+transform: scale(1.05);
+}
+
+.bone_filter button:focus {
+outline: none;
+box-shadow: 0 0 5px 2px rgba(0, 188, 119, 0.5);
+}
+
+.bone_filter button.active {
+border: 2px solid #333;
+opacity: 1;
+}

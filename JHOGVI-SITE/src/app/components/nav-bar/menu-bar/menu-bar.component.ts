@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-menu-bar',
@@ -7,6 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './menu-bar.component.css'
 })
 export class MenuBarComponent {
+	// isFixed: boolean = false; // Define se a barra fica fixa ou não
+
+	// @HostListener('window:scroll', [])
+	// onScroll() {
+	//   this.isFixed = window.scrollY > 50; // Se rolar mais de 50px, torna fixo
+	// }
+
 	// @Input()
 	// imgLogo:string='';
 	ngOnInit(){}

@@ -1,0 +1,60 @@
+app-card-resumo{
+	width: 90%;
+	min-height: 100px;
+}
+
+.checkout__container{
+	display: flex;
+	justify-content: space-around;
+	min-height: 77vh;
+	padding: 20px 10px;
+}
+
+.left{
+	display: flex;
+	flex-direction: column;
+	border: 3px solid silver;
+	border-radius: 10px;
+	justify-content: space-between;
+	min-width: 60vw;
+
+}
+.right {
+	min-width: 30vw;
+	height: 77vh;
+	display: flex;
+	border: 3px solid silver;
+	border-radius: 20px;
+	justify-content: center;
+}
+
+.checkout_total {
+	position: relative;
+	padding: 20px;
+	width: 95%;
+}
+
+.contents{
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+
+	gap: 15px;
+}
+
+
+.contents> div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}
+
+.resumo{
+	height: 20%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+}

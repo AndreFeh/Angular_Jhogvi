@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SocialMediaService } from '../../../services/social-media.service';
 
 @Component({
   selector: 'app-right',
@@ -7,6 +8,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './right.component.css'
 })
 export class RightComponent {
+	socialLinks: any[] = [];
+
 	@Input()
 	imgBack:string = '';
 	@Input()
@@ -28,6 +31,11 @@ export class RightComponent {
 		};
 	}
 
-	constructor(){}
+	constructor(private socialService: SocialMediaService){}
+
+	ngOnInit() {
+		this.socialLinks = this.socialService.getSocialLinks();
+	  }
+
 
 }

@@ -1,35 +1,29 @@
-<div class="home__container" >
-	<div class="home_buttons">
-		<!-- Botões de escolha de boné -->
-		<button *ngFor="let produto of produtos"
-			(click)="selecionarBone(produto)"
-			[ngStyle]="{'background-color': produto.cor.toLowerCase()}"
-		>{{ produto.cor }}</button>
-	</div>
+<div class="home__container">
+	<div class="content">
+		<div>
+			<div class="bone_filter">
+				<button *ngFor="let produto of produtos"
+					(click)="selecionarBone(produto)"
+					[class.active]="selectedBone?.cor === produto.cor"
+					[ngStyle]="{ 'background-color': produto.cor.toLowerCase() }">
+					<img [src]="produto.imagens[0]" alt="">
+				</button>
+			</div>
 
-	  <!-- Exibição do boné com base na seleção -->
-	<app-left *ngIf="selectedBone"
-		[imgMockups]="selectedBone.imagens"
-		[backgroundImage]="'assets/plataforma_digital.jpg'">
-	</app-left>
+			<app-left
+				*ngIf="selectedBone"
+				[imgMockups]="selectedBone.imagens"
+				[backgroundImage]="'assets/plataforma_digital.jpg'">
+			</app-left>
 
-	<app-right *ngIf="selectedBone"
-				[imgBack]="imgBack"
-				[titulo]="selectedBone.titulo"
-				[descricao]="selectedBone.descricao"
-				[detalhes]="selectedBone.detalhes">
-	</app-right>
+		</div>
 
-	<!-- <div *ngFor="let produto of produtos"> -->
-		<!-- <app-left [imgMockups]="produto.imagens"/>
 		<app-right
-			[imgBack]='imgBack'
-			[titulo]='produto.titulo'
-			[descricao]='produto.descricao'
-			[detalhes]='produto.detalhes'
-		/>
-		</div> -->
-</div>
-<div class="info_aditionals">
-	<div></div>
+			*ngIf="selectedBone"
+			[imgBack]="imgBack"
+			[titulo]="selectedBone.titulo"
+			[descricao]="selectedBone.descricao"
+			[detalhes]="selectedBone.detalhes">
+		</app-right>
+	</div>
 </div>

@@ -1,1 +1,28 @@
-<p>products works!</p>
+<div class="products__container">
+	<div class="products_filter">
+		<app-filter
+		[tituloNome]="'Nome do Produto'"
+		[tituloTipo]="'Tecnologias'"
+		tituloLocalidade="Caracteristicas"
+		[opcoesCat]="opcoesCategorias"
+		[opcoesLocal]="opcoesDetalhes"
+		(filtrar)="aplicarFiltros($event)"
+		(limpar)="limparFiltros()"
+		></app-filter>
+	</div>
+	<div class="products_cards" *ngIf="elementosFiltrados.length !== 0">
+		<h1>Produtos</h1>
+		<div>
+			<app-mini-card
+				*ngFor="let prod of elementos"
+				[id]="prod.id"
+				[imgProduct]="prod.imagens[0]"
+				[title]="prod.titulo"
+				[price]="prod.preco"
+			/>
+		</div>
+	</div>
+	<div *ngIf="elementosFiltrados.length === 0">
+		<p>Nenhum resultado encontrado.</p>
+	</div>
+</div>

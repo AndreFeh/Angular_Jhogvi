@@ -1,0 +1,11 @@
+<div class="resumo__container">
+	<div class="resumo_imagem">
+		<img [src]="imgProduto" [alt]="titulo">
+	</div>
+	<div class="resumo_info">
+		<h3>{{titulo}}</h3>
+		<span>{{detalhes}}</span>
+		<p>{{formatBrl.formatBrl(quantidade)}}</p>
+		<p>{{formatBrl.formatBrl(valor)}}</p>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+.profile__container, .profile_contents{
+	display: flex;
+	flex-direction: column;
+}
+

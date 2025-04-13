@@ -1,1 +1,56 @@
-<p>checkout works!</p>
+<div class="checkout__container">
+	<div class="left">
+		<div class="checkout_street">
+			<h2>Endereco de Entrega</h2>
+			<div>
+				<p>street</p>
+				<p>local</p>
+			</div>
+			<div>
+				<p>localidade</p>
+				<p>cep</p>
+			</div>
+		</div>
+		<div class="checkout_payment">
+			<h2>Métodos de Pagamentos</h2>
+			metodo[]
+			descricao[metodo]
+
+		</div>
+		<div class="checkout_lis">
+			<h2>Resumo Produtos/Ingressos</h2>
+			<app-card-resumo/>
+		</div>
+
+	</div>
+	<div class="right">
+		<div class="checkout_total">
+			<h1>Resumo</h1>
+			<div class="contents">
+				<div>
+					<h4>Subtotal</h4>
+					<h4>R$ {{formatBrl.formatBrl(price)}}</h4>
+				</div>
+				<div>
+					<h4>Quantidade</h4>
+					<h4>R$ {{formatBrl.formatBrl(qtdTotal)}}</h4>
+				</div>
+				<div *ngIf="discount!=0">
+					<h4>Desconto</h4>
+					<h4>R$ {{formatBrl.formatBrl(discount)}}</h4>
+				</div>
+				<!-- <input type="text">
+				<input type="submit" class="aplicarDesconto">Aplicar -->
+			</div>
+			<div class="resumo">
+				<div>
+					<h2>Total</h2>
+					<h2>R$ {{formatBrl.formatBrl(total)}}</h2>
+				</div>
+				<div>
+					<button>Finalizar Compra</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

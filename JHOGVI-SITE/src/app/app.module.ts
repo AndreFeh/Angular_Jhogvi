@@ -14,6 +14,30 @@ import { CostumerSupportComponent } from './pages/costumer-support/costumer-supp
 import { EventosComponent } from './pages/eventos/eventos.component';
 import { LeftComponent } from './components/home/left/left.component';
 import { RightComponent } from './components/home/right/right.component';
+import { SocialMediaComponent } from './components/social-media/social-media.component';
+import { ContactComponent } from './components/costumer/contact/contact.component';
+import { SupportComponent } from './components/costumer/support/support.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FilterComponent } from './components/filters/filter/filter.component';
+// Importando os módulos do Angular Material
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MiniCardComponent } from './components/cards/mini-card/mini-card.component';
+import { ContentComponent } from './pages/content/content.component';
+import { ElementsComponent } from './components/shopping-cart/elements/elements.component';
+import { ResultedComponent } from './components/shopping-cart/resulted/resulted.component';
+import { ParsePrecoPipe } from './shared/parse-preco.pipe';
+import { CardEventComponent } from './components/card-event/card-event.component';
+import { EventComponent } from './pages/event/event.component';
+import { ProfileComponent } from './components/my-account/profile/profile.component';
+import { WalletComponent } from './components/my-account/wallet/wallet.component';
+import { AddressComponent } from './components/my-account/address/address.component';
+import { OrdersComponent } from './components/my-account/orders/orders.component';
+import { CardResumoComponent } from './components/checkout/card-resumo/card-resumo.component';
+
+
 
 @NgModule({
   declarations: [
@@ -28,11 +52,32 @@ import { RightComponent } from './components/home/right/right.component';
     CostumerSupportComponent,
     EventosComponent,
     LeftComponent,
-    RightComponent
+    RightComponent,
+    SocialMediaComponent,
+    ContactComponent,
+    SupportComponent,
+    FilterComponent,
+    MiniCardComponent,
+    ContentComponent,
+    ElementsComponent,
+    ResultedComponent,
+    ParsePrecoPipe,
+    CardEventComponent,
+    EventComponent,
+    ProfileComponent,
+    WalletComponent,
+    AddressComponent,
+    OrdersComponent,
+    CardResumoComponent,
   ],
   imports: [
+	ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+	MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+	FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

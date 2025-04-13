@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { produtos } from '../../data/produtos'; // Importe o arquivo de dados
-
+import { Component, OnInit } from '@angular/core';
+import { ProdutosService } from '../../services/produtos.service';
+import { Produto } from '../../models/produto';
 
 @Component({
   selector: 'app-home',
@@ -8,34 +8,30 @@ import { produtos } from '../../data/produtos'; // Importe o arquivo de dados
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-	produtos=produtos;
+export class HomeComponent implements OnInit {
+	produtos: Produto[] = []; // É ISSO UMA BOA PRATICA EM VEZ DE ANY[]
+	imgMockups: string[] = [];
+	imgBack: string = 'assets/fundo_tech.png';
+	titulo: string = '';
+	descricao: string = '';
+	detalhes: string[] = [];
 
-	imgMockups:string[]=[
-		'assets/3d/mockup1.png',
-		'assets/3d/mockup2.png',
-		'assets/3d/mockup3.png',
-		'assets/3d/mockup4.png',
-		'assets/3d/mockup5.png',
-		'assets/3d/mockup6.png',
-		'assets/3d/mockup7.png',
-		'assets/3d/mockup8.png',
-		'assets/3d/mockup9.png',
-		'assets/3d/mockup10.png'];
-	imgBack :string= 'assets/fundo_tech.png';
-	titulo :string= '';
-	descricao :string= '';
-	detalhes:string[] = [];
+	selectedBone: any = null;
 
-	constructor(){}
+	constructor(private produtosService: ProdutosService) {}
 
-	  // Variáveis para armazenar os dados do produto selecionado
-	  selectedBone: any = this.produtos[0]; // Iniciar com o primeiro boné (padrão)
-
-	  // Função para atualizar os dados do boné quando um botão for clicado
-	  selecionarBone(bone: any) {
+	ngOnInit() {
+		this.produtosService.getProdutosPorCategoria('boné').subscribe((data) => {
+			this.produtos = data;
+			if (this.produtos.length > 0) {
+			  this.selectedBone = this.produtos[0]; // pré-seleciona o primeiro boné
+			}
+		  });
+	}
+	selecionarBone(bone: any) {
 		this.selectedBone = bone;
 	  }
+
 
 
 }

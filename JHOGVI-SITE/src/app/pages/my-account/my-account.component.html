@@ -1,1 +1,121 @@
-<p>my-account works!</p>
+<!-- Painel principal -->
+<div class="account__container">
+	<div class="account_profile">
+		<div class="my_photo">
+			<img [src]="imgProfile" alt="Foto">
+			<h2>{{ clientData.firstNome + " " + clientData.lastNome }}</h2>
+			<a (click)="toggleSection('profile')">Editar</a>
+		</div>
+
+				<!-- PROFILE -->
+		<div *ngIf="showProfileEditor" class="modal-overlay">
+			<div class="modal-content">
+				<!-- Apenas mostra o editor se for necessário -->
+				<app-profile
+				*ngIf="showProfileEditor"
+				[dados]="clientData"
+				(salvar)="saveProfile($event)"
+				(fechar)="closeAllSections()"
+				></app-profile>
+
+			</div>
+		</div>
+
+	  <div class="my_info">
+		<ul>
+		  <a (click)="toggleSection('wallet')">
+			<li class="li_profile">
+			  <img [src]="icoCarteira" alt="Carteira">
+			  <h4>Carteira</h4>
+			  <h4>Pix | Cartões</h4>
+			</li>
+		  </a>
+		  <a [routerLink]="'/carrinho'">
+			<li class="li_profile">
+			  <img [src]="icoCarrinho" alt="Carrinho">
+			  <h4>Carrinho</h4>
+			  <h4>de Compras</h4>
+			</li>
+		  </a>
+		  <a (click)="toggleSection('address')">
+			<li class="li_profile">
+			  <img [src]="icoEndereco" alt="Casa">
+			  <h4>Endereços</h4>
+			</li>
+		  </a>
+		  <a (click)="toggleSection('orders')">
+			<li class="li_profile">
+			  <img [src]="icoCompras" alt="Compras">
+			  <h4>Histórico</h4>
+			  <h4>de Compras</h4>
+			</li>
+		  </a>
+		  <a [routerLink]="'/suporte'">
+			<li class="li_profile">
+			  <img [src]="icoSup" alt="Ajuda">
+			  <h4>Suporte</h4>
+			  <h4>Sugestões</h4>
+			</li>
+		  </a>
+		</ul>
+	  </div>
+	</div>
+
+	<!-- Pedidos -->
+	<div class="account_requests">
+	  <ul>
+		<a (click)="toggleSection('orders')">
+		  <li class="li_pedidos">
+			<img [src]="imgPedidosGeral" alt="Todos Pedidos">
+			<h4>Meus Pedidos</h4>
+		  </li>
+		</a>
+		<a (click)="toggleSection('orders')">
+		  <li class="li_pedidos">
+			<img [src]="imgRastreioPedidos" alt="Rastreio">
+			<h4>Rastrear Pedido</h4>
+		  </li>
+		</a>
+		<a (click)="toggleSection('orders')">
+		  <li class="li_pedidos">
+			<img [src]="imgPedidosConcluidos" alt="Pedidos Concluidos">
+			<h4>Pedidos Concluídos</h4>
+		  </li>
+		</a>
+		<a (click)="toggleSection('orders')">
+		  <li class="li_pedidos">
+			<img [src]="imgMinhasAvaliacoes" alt="Minhas Avaliacoes">
+			<h4>Minhas Avaliações</h4>
+		  </li>
+		</a>
+	  </ul>
+	</div>
+  </div>
+
+  <!-- Componentes dinâmicos (expansíveis) -->
+  <!-- <app-profile *ngIf="showProfileEditor" (fechar)="closeAllSections()"></app-profile>
+  <app-address *ngIf="showAddressEditor" (fechar)="closeAllSections()"></app-address>
+  <app-wallet *ngIf="showWalletSection" (fechar)="closeAllSections()"></app-wallet>
+  <app-orders *ngIf="showOrdersSection" (fechar)="closeAllSections()"></app-orders> -->
+
+
+  <!-- ADDRESS -->
+  <div *ngIf="showAddressEditor" class="modal-overlay">
+	<div class="modal-content">
+	  <app-address (fechar)="showAddressEditor = false"></app-address>
+	</div>
+  </div>
+
+  <!-- ORDERS -->
+  <div *ngIf="showOrdersSection" class="modal-overlay">
+	<div class="modal-content">
+	  <app-orders (fechar)="showOrdersSection = false"></app-orders>
+	</div>
+  </div>
+
+  <!-- WALLET -->
+  <div *ngIf="showWalletSection" class="modal-overlay">
+	<div class="modal-content">
+	  <app-wallet (fechar)="showWalletSection = false"></app-wallet>
+	</div>
+  </div>

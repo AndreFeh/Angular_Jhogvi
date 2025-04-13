@@ -1,0 +1,41 @@
+app-card-event{
+	width: 80%;
+}
+
+.eventos__container{
+	display: flex;
+	flex-direction: row;
+	min-height: 75vh;
+	justify-content: center;
+	padding: 30px 15px;
+	gap: 10px;
+	flex-wrap: wrap;
+
+}
+.events_filter{
+	min-width: 20%;
+	/* border: 1px solid red; */
+}
+
+.events_cards{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: 68%;	padding: 15px 0px;
+
+	border-radius: 15px;
+	border: 3px solid silver;
+}
+
+
+.eventos_elements{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+}
+
+

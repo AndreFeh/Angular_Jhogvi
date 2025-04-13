@@ -1,0 +1,41 @@
+<div class="content__container">
+	<div class="content__content">
+	  <div class="content__main">
+		<div class="content__cover">
+		  <img [src]="img" alt="Imagem do Produto" />
+		</div>
+
+		<div class="content__elements">
+		  <div class="content__title">
+			<h1>{{ titulo }}</h1>
+		  </div>
+
+		  <div class="content__price">
+			<!-- <span class="old-price" *ngIf="oldPrice > 0">
+			  R$ {{ oldPrice }}
+			</span> -->
+			<h3 class="current-price">
+			  R$ {{ currentPrice }}
+			</h3>
+		  </div>
+
+		  <div class="content__shopping">
+			<ul>
+			  <li>
+				<button>Comprar</button>
+			  </li>
+			  <li>
+				<button (click)="addToCart()">Adicionar ao Carrinho</button>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+
+	  <div class="content__description">
+		<p>
+		  {{ descricao }}
+		</p>
+	  </div>
+	</div>
+  </div>

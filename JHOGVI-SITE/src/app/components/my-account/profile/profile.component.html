@@ -1,0 +1,15 @@
+<div class="profile__container">
+	<form (ngSubmit)="emitirSalvar()">
+		<div class="profile_contents">
+			<h4>Nome:</h4>
+			<input [(ngModel)]="dadosEditaveis.nome" type="text" name="nome">
+			<h4>Sobrenome:</h4>
+			<input [(ngModel)]="dadosEditaveis.sobrenome" type="text" name="sobrenome">
+			<h4>Email:</h4>
+			<input [(ngModel)]="dadosEditaveis.email" type="email" name="email">
+		</div>
+		<button type="submit">Salvar</button>
+		<button type="button" (click)="fechar.emit()">Cancelar</button>
+	</form>
+
+</div>

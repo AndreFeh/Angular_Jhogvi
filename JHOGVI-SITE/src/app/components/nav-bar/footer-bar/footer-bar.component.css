@@ -1,0 +1,7 @@
+.footer__container{
+	width: 100%;
+	min-height: 10vh;
+	background-color: black;
+	color: white;
+	border-top: 2px solid white;
+}

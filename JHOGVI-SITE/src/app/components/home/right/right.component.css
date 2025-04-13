@@ -5,9 +5,8 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	width: 48vw;
+	min-width: 100%;
 	height: 79vh; /* ou defina uma altura fixa */
-	padding: 10px;
 	overflow: hidden;
 }
 
@@ -40,58 +39,10 @@
 
 
 /*********************************/
-.social-buttons, .social-btn, .social-icone, .whatsapp, .instagram, .facebook{
+.social_buttons{
+	position: absolute;
+	bottom: 0;
+	right: 0;
 	background-color: transparent;
 }
 
-.social-buttons {
-	position: fixed;
-	bottom: 50px; /* Distância do fundo da tela */
-	right: 50px; /* Distância da borda esquerda */
-	display: flex;
-	flex-direction: row;
-	gap: 10px; /* Espaçamento entre os botões */
-	z-index: 1000; /* Garante que os botões fiquem acima de outros conteúdos */
-  }
-
-  .social-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 50px; /* Largura do botão */
-	height: 50px; /* Altura do botão */
-	border-radius: 50%;
-	background-color: white;
-	overflow: hidden;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adicionando sombra para dar destaque */
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .social-btn:hover {
-	transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .social-btn img {
-	width: 30px; /* Tamanho do ícone */
-	height: 30px; /* Tamanho do ícone */
-	object-fit: contain; /* Faz o ícone se ajustar dentro do espaço */
-  }
-
-  .whatsapp {
-	background-color: #25D366; /* Cor do WhatsApp */
-	object-fit: cover; /* Faz com que a imagem se ajuste corretamente, mantendo a proporção */
-
-  }
-
-  .instagram {
-	background-color: #C13584; /* Cor do Instagram */
-	object-fit: cover; /* Faz com que a imagem se ajuste corretamente, mantendo a proporção */
-
-  }
-
-  .facebook {
-	background-color: #8eb2fa; /* Cor do Facebook */
-	object-fit: cover; /* Faz com que a imagem se ajuste corretamente, mantendo a proporção */
-
-  }

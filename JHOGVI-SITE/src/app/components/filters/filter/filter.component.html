@@ -1,0 +1,52 @@
+<div class="filter__container">
+	<h1>Filtros</h1>
+	<div class="filter_contents">
+		<!-- Nome -->
+		<div>
+			<h3>{{ tituloNome }}</h3> <!-- Exibe o título fixo -->
+			<mat-form-field>
+				<mat-label	>Nome</mat-label>
+				<input matInput [(ngModel)]="nome" placeholder="Digite aqui" />
+				<mat-hint align="end">{{ nome.length }}/100</mat-hint>
+			</mat-form-field>
+		</div>
+
+		<!-- Tipo -->
+		<div>
+			<h3>{{ tituloTipo }}</h3>
+			<mat-form-field>
+				<mat-label>Tipo</mat-label>
+				<input matInput [(ngModel)]="tipo" placeholder="Digite aqui" />
+				<mat-hint align="end">{{ tipo.length }}/100</mat-hint>
+			</mat-form-field>
+		</div>
+
+		<!-- Categoria -->
+		<div>
+			<h3>{{ tituloCategoria }}</h3>
+			<mat-form-field>
+				<mat-label>Selecione a categoria</mat-label>
+				<mat-select [(ngModel)]="categoria">
+					<mat-option *ngFor="let cat of opcoesCat" [value]="cat">{{ capitalizeFirst(cat) }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<!-- Localidade -->
+		<div>
+			<h3>{{ tituloLocalidade }}</h3>
+			<mat-form-field>
+				<mat-label>Selecione o local</mat-label>
+				<mat-select [(ngModel)]="localidade">
+					<mat-option *ngFor="let local of opcoesLocal" [value]="local">{{ capitalizeFirst(local) }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+
+	<!-- Botões -->
+	<div class="filter_buttons">
+		<button mat-raised-button class="filter" (click)="aplicarFiltro()">Filtrar</button>
+		<button mat-raised-button class="clean" (click)="limparFiltro()">Limpar</button>
+	</div>
+</div>

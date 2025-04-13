@@ -1,1 +1,34 @@
-<p>shopping-cart works!</p>
+<div class="shopping__container">
+	<div class="shopping__info">
+	  <div class="shopping__components">
+
+		<div class="elements_check">
+			<input type="checkbox">
+		</div>
+		<div class="elements_products">
+			<h2>Descrição</h2>
+		</div>
+		<div class="ekements_qtd">
+			<h3>UN</h3>
+		</div>
+		<div class="elements_price">
+			<h3>Valor UN</h3>
+			<h3>Total</h3>
+		</div>
+
+
+
+	  </div>
+	  <app-elements
+	  *ngFor="let product of products "
+	  [id]="product.id"
+		[prodName]="product.titulo"
+		[qtd]="product.qtd"
+		[price]="product.preco"
+		(updateQtd)="updateQtd(product.id, $event)"
+		/>
+	</div>
+	<div class="resulted">
+	  <app-resulted [cartItems]="products" [totalPrice]="totalPrice"></app-resulted>
+	</div>
+</div>

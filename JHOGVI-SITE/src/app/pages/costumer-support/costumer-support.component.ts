@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-costumer-support',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './costumer-support.component.css'
 })
 export class CostumerSupportComponent {
+	@Input() presenting_img: string="assets/";
+	@Input() missao: string="Nossa missao...";
+	@Input() visao:string="Nossa vissao...";
+	@Input() valores: string="Nossos valores...";
 
 }
