@@ -1,4 +1,4 @@
-<div class="resulted-container">
+<!-- <div class="resulted-container">
 	<h2>Resumo do Pedido</h2>
 
 	<ul>
@@ -11,6 +11,31 @@
 
 	<h3>Total: R$ {{ totalPrice.toFixed(2) }}</h3>
 	<div class="resulted_buttons">
-	  <!-- <button (click)="Comprar()">Comprar</button> -->
 	</div>
+  </div> -->
+
+
+  <div class="resulted__container">
+	<div class="tb-end">
+	  <table>
+		<tr>
+		  <th>Preço</th>
+			<td>R$ {{formatBrl.formatBrl(price) }}</td>
+		  </tr>
+		<tr>
+		  <th>Quantidade</th>
+		  <td>{{qtd}}</td>
+		</tr>
+		<tr *ngIf="desc>0">
+		  <th>Desconto</th>
+		  <td>R$ - {{formatBrl.formatBrl(desc)}}</td>
+		</tr>
+		<tr class="total">
+		  <th><h3>Total</h3></th>
+		  <td>R$ {{formatBrl.formatBrl(total)}}</td>
+		</tr>
+	  </table>
+	  <button type="submit" (click)="handleComprar()">Comprar</button>
+	</div>
+
   </div>

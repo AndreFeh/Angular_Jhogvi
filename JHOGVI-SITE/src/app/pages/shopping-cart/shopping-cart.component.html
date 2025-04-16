@@ -3,7 +3,7 @@
 	  <div class="shopping__components">
 
 		<div class="elements_check">
-			<input type="checkbox">
+			<input type="checkbox" (change)="toggleAllSelection()" [checked]="selectAll">
 		</div>
 		<div class="elements_products">
 			<h2>Descrição</h2>
@@ -20,13 +20,17 @@
 
 	  </div>
 	  <app-elements
-	  *ngFor="let product of products "
+	  *ngFor="let product of products"
 	  [id]="product.id"
-		[prodName]="product.titulo"
-		[qtd]="product.qtd"
-		[price]="product.preco"
-		(updateQtd)="updateQtd(product.id, $event)"
-		/>
+	  [prodImg]="product.imagens?.[0] || 'caminho/para/imagem-padrão.jpg'"
+	  [prodName]="product.titulo"
+	  [qtd]="product.qtd"
+	  [price]="product.preco"
+	  [isSelected]="product.selected !== undefined ? product.selected : false"
+	  (updateQtd)="updateQtd(product.id, $event)"
+	  (toggleSelection)="updateProductSelection(product.id, !product.selected)"
+	/>
+
 	</div>
 	<div class="resulted">
 	  <app-resulted [cartItems]="products" [totalPrice]="totalPrice"></app-resulted>

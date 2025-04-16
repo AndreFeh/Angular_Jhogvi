@@ -3,21 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { produtos, Produto } from '../../data/data';
 import { CartService } from '../../services/cart.service';
 import { ValuesService } from '../../services/values.service';
-import { ProdutoCarrinho } from '../../models/produto-carrinho';
+import { ItemCarrinho } from '../../models/item-carrinho';
 import { ParsePrecoPipe } from '../../shared/parse-preco.pipe';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css'],
-  standalone:false
+  standalone: false
 })
 export class ContentComponent implements OnInit {
-  img!: string;
-  currentPrice!: number;
-  titulo!: string;
-  descricao!: string;
-  private id!: number;
+  produto!: Produto;
+  id!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,49 +28,49 @@ export class ContentComponent implements OnInit {
       const idParam = params.get('id');
       if (idParam) {
         this.id = +idParam;
-        this.loadProductById(this.id);
+        this.carregarProduto(this.id);
       } else {
         console.error("ID não encontrado na rota.");
       }
     });
   }
 
-  private loadProductById(id: number): void {
-	const allProducts: Produto[] = produtos[0].categorias
-	.flatMap(categoriaObj => {
-	  // filtra apenas os valores que são arrays (produtos), ignora o id (number)
-	  return Object.values(categoriaObj).filter(val => Array.isArray(val)).flat() as Produto[];
-	});
-	  const produto = allProducts.find(prod => prod.id === id);
+  private carregarProduto(id: number): void {
+	// Acessando diretamente os produtos dentro da categoria
+	const todosProdutos: Produto[] = produtos
+	  .flatMap(produto => produto.categoria ? [produto] : []);
 
-    if (produto) {
-      this.img = produto.imagens[0] || '';
-      this.currentPrice = produto.preco;
-      this.titulo = produto.titulo;
-      this.descricao = produto.descricao;
-    } else {
-      console.error("Produto não encontrado!");
-    }
+	const encontrado = todosProdutos.find(p => p.id === id);
+
+	if (encontrado) {
+	  this.produto = encontrado;
+	} else {
+	  console.error("Produto não encontrado!");
+	}
   }
 
-  addToCart(): void {
-    const produto: ProdutoCarrinho = {
-      id: this.id,
-      img: this.img,
-      titulo: this.titulo,
-      descricao: this.descricao,
-      preco: this.currentPrice,
-      qtd: 1
+  get cor(): string[] | undefined {
+	const corString = this.produto?.detalhes?.find(d => d.toLowerCase().startsWith('cor:'))?.split(':')[1]?.trim();
+	return corString ? corString.split(',').map(c => c.trim()) : undefined;
+  }
+
+
+  adicionarAoCarrinho(): void {
+    if (!this.produto) return;
+
+    const item: ItemCarrinho = {
+      id: this.produto.id,
+      titulo: this.produto.titulo,
+      preco: this.produto.preco,
+      qtd: 1,
+      imagens: this.produto.imagens,
+      descricao: this.produto.descricao,
+      detalhes: this.produto.detalhes,
+      cor: this.cor,
+      tipo: 'produto'
     };
 
-    this.cartService.addToCart({
-      ...produto,
-      categoria: '',
-      cor: '',
-      imagens: [],
-      detalhes: []
-    });
-
-    alert(`${this.titulo} foi adicionado ao carrinho!`);
+    this.cartService.addToCart(item);
+    alert(`${this.produto.titulo} foi adicionado ao carrinho!`);
   }
 }

@@ -1,8 +1,7 @@
-export interface ProdutoCarrinho {
+export interface EventoCarrinho {
 	id: number;
 	img: string;
 	titulo: string;
-	descricao: string | string[];
 	preco: number;
 	qtd: number;
-  }
+}

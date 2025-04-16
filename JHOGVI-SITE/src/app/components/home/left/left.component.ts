@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-left',
@@ -14,6 +14,8 @@ export class LeftComponent {
 	backgroundImage: string = '';
 
 	currentMockupIndex: number = 0;
+	@Output() comprar = new EventEmitter<void>(); // avisa o componente pai
+
 
 	constructor() {
 	// Inicia a troca das imagens a cada 3 mili-segundos (3000ms)
@@ -48,5 +50,9 @@ export class LeftComponent {
 			// 'height': '77vh'
 		};
 	}
+	onComprarClick() {
+		this.comprar.emit(); // dispara o evento pro pai
+	  }
+
 
 }

@@ -5,6 +5,7 @@
 	align-items: center;
 
 	min-height: 300px;
+	max-height: 400px;
 	width: 190px;
 	background-color: rgba(97, 97, 97, 0.24);
 	border: 3px solid silver;
@@ -28,7 +29,7 @@
 
 .mini_img{
 	border-radius: 10px;
-	background-color: black;
+	background-color: transparent;
 	width: 80%;
 	height: 50%;
 
@@ -42,6 +43,14 @@
 
 	object-fit: cover;
 	border-radius: 10px;
+}
+
+.mini_content > h2{
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* número de linhas */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .mini_content{

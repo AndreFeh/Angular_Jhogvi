@@ -1,52 +1,68 @@
+<!-- Alerta dinâmico -->
+<div *ngIf="showFeedback" class="alert-box">
+  <mat-card class="mat-elevation-z4 alert-content">
+    {{ feedbackMessage }}
+  </mat-card>
+</div>
+
+<!-- Container dos filtros -->
 <div class="filter__container">
-	<h1>Filtros</h1>
-	<div class="filter_contents">
-		<!-- Nome -->
-		<div>
-			<h3>{{ tituloNome }}</h3> <!-- Exibe o título fixo -->
-			<mat-form-field>
-				<mat-label	>Nome</mat-label>
-				<input matInput [(ngModel)]="nome" placeholder="Digite aqui" />
-				<mat-hint align="end">{{ nome.length }}/100</mat-hint>
-			</mat-form-field>
-		</div>
+  <h1>Filtros</h1>
+  <div class="filter_contents">
 
-		<!-- Tipo -->
-		<div>
-			<h3>{{ tituloTipo }}</h3>
-			<mat-form-field>
-				<mat-label>Tipo</mat-label>
-				<input matInput [(ngModel)]="tipo" placeholder="Digite aqui" />
-				<mat-hint align="end">{{ tipo.length }}/100</mat-hint>
-			</mat-form-field>
-		</div>
+    <!-- Filtro por Nome -->
+    <div>
+      <h3>{{ nameTitle }}</h3>
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <mat-select [(ngModel)]="name">
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let n of nameOptions" [value]="n">{{ capitalizeFirst(n) }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-		<!-- Categoria -->
-		<div>
-			<h3>{{ tituloCategoria }}</h3>
-			<mat-form-field>
-				<mat-label>Selecione a categoria</mat-label>
-				<mat-select [(ngModel)]="categoria">
-					<mat-option *ngFor="let cat of opcoesCat" [value]="cat">{{ capitalizeFirst(cat) }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
+    <!-- Filtro por Tipo -->
+    <div>
+      <h3>{{ typeTitle }}</h3>
+      <mat-form-field>
+        <mat-label>{{ typeTitle }}</mat-label>
+        <mat-select [(ngModel)]="type">
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let t of typeOptions" [value]="t">{{ capitalizeFirst(t) }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-		<!-- Localidade -->
-		<div>
-			<h3>{{ tituloLocalidade }}</h3>
-			<mat-form-field>
-				<mat-label>Selecione o local</mat-label>
-				<mat-select [(ngModel)]="localidade">
-					<mat-option *ngFor="let local of opcoesLocal" [value]="local">{{ capitalizeFirst(local) }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
-	</div>
+    <!-- Filtro por Subcategoria -->
+    <div>
+      <h3>{{ subcategoryTitle }}</h3>
+      <mat-form-field>
+        <mat-label>{{ subcategoryTitle }}</mat-label>
+        <mat-select [(ngModel)]="subcategory">
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let sub of subcategoryOptions" [value]="sub">{{ capitalizeFirst(sub) }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-	<!-- Botões -->
-	<div class="filter_buttons">
-		<button mat-raised-button class="filter" (click)="aplicarFiltro()">Filtrar</button>
-		<button mat-raised-button class="clean" (click)="limparFiltro()">Limpar</button>
-	</div>
+    <!-- Filtro por Localização (se for evento) -->
+    <div *ngIf="filterType === 'event'">
+      <h3>{{ locationTitle }}</h3>
+      <mat-form-field>
+        <mat-label>{{ locationTitle }}</mat-label>
+        <mat-select [(ngModel)]="location">
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let local of locationOptions" [value]="local">{{ capitalizeFirst(local) }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <!-- Botões -->
+  <div class="filter_buttons">
+    <button mat-raised-button class="filter" (click)="applyFilter()">Filtrar</button>
+    <button mat-raised-button class="clean" (click)="clearFilter()">Limpar</button>
+  </div>
 </div>

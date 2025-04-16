@@ -15,7 +15,7 @@ export class RightComponent {
 	@Input()
 	titulo:string='';
 	@Input()
-	descricao:string='';
+	descricao?:string[];
 	@Input()
 	detalhes:string[]=[];
 

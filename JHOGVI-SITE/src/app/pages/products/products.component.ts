@@ -10,41 +10,59 @@ import { produtos } from '../../data/data';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-	elementos: Produto[] = [];
-	elementosFiltrados :Produto[]= [];
-	opcoesCategorias:string[]=[''];
-	opcoesDetalhes: string[]=[''];
+	products: Produto[] = [];
+	filteredProducts: Produto[] = [];
+	categoryOptions: string[] = [];
+	typeOptions: string[] = [];
+	nameOptions: string[] = [];
 
-	constructor(private filterService: FilterService){}
+	showFeedback: boolean = false;
+	feedbackMessage: string = '';
+
+	constructor(private filterService: FilterService) {}
 
 	ngOnInit() {
-		// Aqui você precisa extrair os produtos de dentro da estrutura de categorias
-		const bones = produtos[0]?.categorias[0]?.boné ?? [];
-
-		this.elementos = bones;
-		this.elementosFiltrados = [...this.elementos];
-
-		// Pegando categorias únicas
-		this.opcoesCategorias = [...new Set(bones.map(p => p.categoria))];
-		this.opcoesDetalhes = this.getDetalhesUnicos('Tipo');
+	  this.products = produtos;
+	  this.filteredProducts = [...this.products];
+	  this.categoryOptions = this.getAllDetails();
+	  this.typeOptions = this.getAllTypes();
+	  this.nameOptions = this.getAllNames();
 	}
 
-	getDetalhesUnicos(chave: string): string[] {
-	const valores = this.elementos.flatMap(produto =>
-			produto.detalhes
-			.filter(detalhe => detalhe.toLowerCase().startsWith(`${chave.toLowerCase()}:`))
-			.map(detalhe => detalhe.split(':')[1].trim())
-		);
-		return [...new Set(valores)];
+	getAllDetails(): string[] {
+	  return [...new Set(this.products.flatMap(p => p.detalhes))];
+	}
+
+	getAllTypes(): string[] {
+	  return [...new Set(this.products.map(p => p.categoria?.trim() || ''))];
+	}
+
+	getAllNames(): string[] {
+	  return [...new Set(this.products.map(p => p.titulo?.trim() || ''))];
 	}
 
 
-	aplicarFiltros(filtros: any) {
-		this.elementosFiltrados = this.filterService.filtrar(this.elementos, filtros);
-	}
+  applyFilters(filters: any) {
+    this.filteredProducts = this.filterService.filterProducts(this.products, filters);
 
-	limparFiltros() {
-		this.elementosFiltrados = this.filterService.limpar(this.elementos);
-	}
+    if (this.filteredProducts.length === 0) {
+      this.showTemporaryFeedback('Nenhum item encontrado.');
+    } else {
+      this.showTemporaryFeedback('Item(s) encontrado(s).');
+    }
+  }
 
+  clearFilters() {
+    const clearedFilters = this.filterService.cleanProductFilters();
+    this.filteredProducts = this.filterService.filterProducts(this.products, clearedFilters);
+    this.showTemporaryFeedback('Filtros limpos.');
+  }
+
+  showTemporaryFeedback(message: string) {
+    this.feedbackMessage = message;
+    this.showFeedback = true;
+    setTimeout(() => {
+      this.showFeedback = false;
+    }, 3000);
+  }
 }

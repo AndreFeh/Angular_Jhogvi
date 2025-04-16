@@ -1,11 +1,11 @@
 <div class="elements__container">
 	<div class="elements_content" *ngIf="(qtd!=0)">
 		<div class="product_check">
-			<input type="checkbox">
+			<input type="checkbox" [checked]="isSelected" (change)="onSelectionChange($event)">
 		</div>
 	  	<div class="elements_products">
 			<a [routerLink]="['/content', id]">
-				<img src="{{prodImg}}" alt="Img Prod" class="img-prod">
+				<img [src]="prodImg" alt="Img Prod" class="img-prod">
 				<p>{{prodName}}</p>
 			</a>
 	  	</div>

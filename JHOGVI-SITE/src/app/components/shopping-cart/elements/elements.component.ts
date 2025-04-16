@@ -25,6 +25,10 @@ export class ElementsComponent {
 	price:number=0;
 
 	@Output()
+	@Input() isSelected: boolean = false;
+    @Output() toggleSelection = new EventEmitter<boolean>();
+
+
 	updateQtd = new EventEmitter<number>();
 
 	constructor(public formatBrl:ValuesService, private cartService:CartService, private parsePreco:ParsePrecoPipe){}
@@ -46,7 +50,7 @@ export class ElementsComponent {
 
 
 	increaseQtd() {
-		this.updateQtd.emit(this.qtd + 1); // Solicita ao pai para atualizar
+		// this.updateQtd.emit(this.qtd + 1); // Solicita ao pai para atualizar
 		this.cartService.incrementToCart(this.id); // Atualiza no service
 	  }
 
@@ -58,8 +62,14 @@ export class ElementsComponent {
 			this.cartService.decrementToCart(this.id); // Atualiza no service
 		  }
 		} else if (this.qtd > 1) {
-		  this.updateQtd.emit(this.qtd - 1); // Solicita decremento ao pai
+		//   this.updateQtd.emit(this.qtd - 1); // Solicita decremento ao pai
 		  this.cartService.decrementToCart(this.id); // Atualiza no service
 		}
 	  }
+
+	  onSelectionChange(event: Event) {
+		const checked = (event.target as HTMLInputElement).checked;
+		this.toggleSelection.emit(checked);
+	  }
+
 }

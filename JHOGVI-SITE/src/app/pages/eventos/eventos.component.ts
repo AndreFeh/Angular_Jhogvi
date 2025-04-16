@@ -10,44 +10,66 @@ import { ValuesService } from '../../services/values.service';
   styleUrl: './eventos.component.css'
 })
 export class EventosComponent {
-	eventos: Evento[] = [];
-	eventosFiltrados :Evento[]= [];
-	opcoesCategorias:string[]=[''];
-	opcoesLocalidades: string[]=[''];
+	events: Evento[] = [];
+	filteredEvents: Evento[] = [];
+	opcoesSubcategorias: string[] = [];
+	opcoesLocalidades: string[] = [];
+	showFeedback: boolean = false;
+	feedbackMessage: string = '';
+	typeOptions: string[] = [];
 
-	constructor(private filterService: FilterService, private valuesService :ValuesService, public formatBrl:ValuesService){}
+	constructor(
+	  private filterService: FilterService,
+	  private valuesService: ValuesService,
+	  public formatBrl: ValuesService
+	) {}
 
 	ngOnInit() {
-		this.eventos = (eventos[0]?.categorias[0]?.evento ?? [])
-		.filter((event: any) => event.entrada !== undefined);
-			  this.eventosFiltrados = [...this.eventos];
-
-		// this.opcoesCategorias = [...new Set(this.eventos.map(event => event.subcategoria))];
-		this.opcoesCategorias = this.getDetalhesUnicos('Categoria');
-		this.opcoesLocalidades = this.getDetalhesUnicos('Localidade');
-	  }
-
-	getDetalhesUnicos(chave: string): string[] {
-	const valores = this.eventos.flatMap(event =>
-			event.detalhes
-			.filter(detalhe => detalhe.toLowerCase().startsWith(`${chave.toLowerCase()}:`))
-			.map(detalhe => detalhe.split(':')[1].trim())
-		);
-		return [...new Set(valores)];
+	  this.initializeEvents();
 	}
 
-
-	aplicarFiltros(filtros: any) {
-		this.eventosFiltrados = this.filterService.filtrarEventos(this.eventos, filtros);
-		if (this.eventosFiltrados.length === 0) {
-			alert("Nenhum item encontrado");
-		  } else {
-			alert("Item(s) encontrado(s)");
-		  }
-
+	// Inicializa os eventos e carrega as opções para os filtros
+	private initializeEvents() {
+	  this.events = eventos;
+	  this.filteredEvents = [...this.events];
+	  this.loadFilterOptions();
 	}
 
-	limparFiltros() {
-		this.eventosFiltrados = this.filterService.limparEventos(this.eventos);
+	// Carrega as opções únicas para os filtros
+	private loadFilterOptions() {
+	  this.opcoesSubcategorias = this.getUniqueField('subcategoria');
+	  this.opcoesLocalidades = this.getUniqueField('localidade');
+	  this.typeOptions = this.getUniqueField('detalhes'); // ou outro campo, dependendo do seu objetivo
 	}
-}
+
+	// Retorna valores únicos de um campo específico dos eventos
+	private getUniqueField(key: keyof Evento): string[] {
+	  const values = this.events
+		.map(event => event[key])
+		.filter((value): value is string => typeof value === 'string' && value.trim() !== '');
+	  return [...new Set(values)];
+	}
+
+	// Aplica os filtros nos eventos
+	applyFilters(filters: any) {
+	  this.filteredEvents = this.filterService.filterEvents(this.events, filters);
+
+	  // Feedback de filtro
+	  this.showFeedback = true;
+	  this.feedbackMessage = this.filteredEvents.length
+		? '✅ Filtros Aplicados!'
+		: '❌ Nenhum Item Encontrado.';
+
+	  setTimeout(() => (this.showFeedback = false), 3000);
+	}
+
+	// Limpa todos os filtros e restaura os eventos
+	clearFilters() {
+	  const emptyFilters = this.filterService.cleanEventFilters();
+	  this.filteredEvents = [...this.events];
+	  this.feedbackMessage = '❌ Filtros removidos!';
+	  this.showFeedback = true;
+
+	  setTimeout(() => (this.showFeedback = false), 3000);
+	}
+  }

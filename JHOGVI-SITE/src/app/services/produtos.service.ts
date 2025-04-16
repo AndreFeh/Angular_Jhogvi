@@ -5,13 +5,13 @@ import { Observable, of } from 'rxjs';
 export interface Produto {
   id: number;
   categoria: string;
-  cor: string;
+  cor: string[];
   imagens: string[];
   titulo: string;
-  descricao: string;
+  descricao?: string[];
   detalhes: string[];
   preco: number;
-  qtd:number;
+  qtd?:number;
 }
 
 interface Categoria <T=Produto>{
@@ -26,20 +26,12 @@ export class ProdutosService {
   private produtosData = produtos;
 
   getProdutosPorCategoria(nomeCategoria: string): Observable<Produto[]> {
-	const categorias = this.produtosData[0]?.categorias ?? [];
-
-	const produtosFiltrados: Produto[] = categorias.flatMap((cat: any) => {
-	  const produtosCategoria = cat[nomeCategoria];
-
-	  if (Array.isArray(produtosCategoria)) {
-		return produtosCategoria.filter(
-		  (prod: any) => 'cor' in prod && 'preco' in prod
-		);
-	  }
-	  return [];
-	});
-
+	const produtosFiltrados = this.produtosData.filter(
+	  (produto: Produto) =>
+		produto.categoria.toLowerCase() === nomeCategoria.toLowerCase()
+	);
 	return of(produtosFiltrados);
   }
+
 
 }

@@ -36,6 +36,7 @@ import { WalletComponent } from './components/my-account/wallet/wallet.component
 import { AddressComponent } from './components/my-account/address/address.component';
 import { OrdersComponent } from './components/my-account/orders/orders.component';
 import { CardResumoComponent } from './components/checkout/card-resumo/card-resumo.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -77,7 +78,8 @@ import { CardResumoComponent } from './components/checkout/card-resumo/card-resu
 	MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-	FormsModule
+	FormsModule,
+	MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

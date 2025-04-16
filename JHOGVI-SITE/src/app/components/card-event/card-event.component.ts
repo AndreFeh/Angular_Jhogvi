@@ -9,14 +9,14 @@ import { ValuesService } from '../../services/values.service';
 })
 export class CardEventComponent {
 	@Input() id:number=0;
-imgEvent: string='assets/img/eventos/img-evento.png';
-@Input()title: string='';
-@Input()local: string='';
-@Input()city: string='';
-@Input()street: string='';
-@Input()date: string='';
-@Input()price: number=0;
-@Input()subcategoria: string='';
+@Input()title!: string;
+@Input()local!: string;
+@Input()imgEvent: string='assets/img/eventos/img-evento.png';
+@Input()city!: string;
+@Input()street!: string;
+@Input()date!: string;
+@Input()price!: number;
+@Input()subcategoria!: string;
 
 constructor(private valuesService:ValuesService, public formatBrl:ValuesService){}
 }
