@@ -1,11 +1,16 @@
-import { Card } from './card';
 import { Street } from './street';
+import { Wallet } from './wallet';
 
 export interface Client {
-  id: number;
-  firstNome: string;
-  lastNome: string;
-  email: string;
-  cartoes: Card[];
-  enderecos: Street[];
-}
+	id: number;
+	photo?:string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	genero: string;
+	cpf?: string;
+	cnpj?: string;
+	tipoConta: 'CPF' | 'CNPJ';
+	enderecos: Street[];
+	wallet: Wallet;
+  }

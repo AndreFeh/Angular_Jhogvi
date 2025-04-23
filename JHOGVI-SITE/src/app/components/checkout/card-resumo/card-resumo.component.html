@@ -1,14 +1,17 @@
-<div class="resumo__container" *ngFor="let item of cartItems">
+<div class="resumo__container" >
 	<div class="resumo_imagem">
-	  <img [src]="item.imagens ? item.imagens[0] : ''" [alt]="item.titulo">
+		<img [src]="imgProduto">
 	</div>
 	<div class="resumo_info">
-	  <h3>{{ item.titulo }}</h3>
-	  <span *ngIf="item.detalhes">{{ item.detalhes.join(', ') }}</span>
-	  <p>{{ formatBrl.formatBrl(item.qtd) }}</p>
-	  <p>{{ formatBrl.formatBrl(item.preco * item.qtd) }}</p>
+		<h3>{{ titulo }}</h3>
+		<span *ngIf="detalhes">{{ detalhes}}</span>
+		<div class="values">
+			<p><strong>Valor:</strong> R$ {{ formatBrl.formatBrl(valor) }}</p>
+			<p><strong> Quantidade:</strong> {{ quantidade }}</p>
+			<p><strong>Total: </strong>R$ {{ formatBrl.formatBrl(valor * quantidade) }}</p>
+		</div>
 	</div>
 	<div class="remove_button">
-	  <button (click)="removeItem(item.id)">Remover</button>
+	<button (click)="removeItem(id)">Remover</button>
 	</div>
-  </div>
+</div>

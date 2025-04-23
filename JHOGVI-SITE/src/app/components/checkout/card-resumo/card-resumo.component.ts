@@ -9,6 +9,7 @@ import { ItemCarrinho } from '../../../models/item-carrinho';
   styleUrl: './card-resumo.component.css'
 })
 export class CardResumoComponent {
+	@Input() id!: number;
 	@Input()imgProduto?: string;
 	@Input()titulo!: string;
 	@Input()detalhes?: string | string[];
@@ -21,6 +22,10 @@ export class CardResumoComponent {
 
 	// Função para remover o item
 	removeItem(productId: number) {
-	  this.itemRemoved.emit(productId);  // Emite o id do produto a ser removido
+		const confirmRemove = confirm('remover item');
+
+		if(confirmRemove===true){
+			this.itemRemoved.emit(productId);  // Emite o id do produto a ser removido
+		}
 	}
   }

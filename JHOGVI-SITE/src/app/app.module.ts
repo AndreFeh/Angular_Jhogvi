@@ -37,6 +37,7 @@ import { AddressComponent } from './components/my-account/address/address.compon
 import { OrdersComponent } from './components/my-account/orders/orders.component';
 import { CardResumoComponent } from './components/checkout/card-resumo/card-resumo.component';
 import { MatCardModule } from '@angular/material/card';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 
@@ -79,9 +80,11 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
 	FormsModule,
-	MatCardModule
+	MatCardModule,
+	NgxMaskDirective,
+    NgxMaskPipe
   ],
-  providers: [],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

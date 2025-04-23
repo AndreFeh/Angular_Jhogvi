@@ -71,6 +71,6 @@ export class ContentComponent implements OnInit {
     };
 
     this.cartService.addToCart(item);
-    alert(`${this.produto.titulo} foi adicionado ao carrinho!`);
+    console.log(`${this.produto.titulo} foi adicionado ao carrinho!`);
   }
 }

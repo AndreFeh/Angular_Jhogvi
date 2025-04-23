@@ -4,6 +4,9 @@ import { ItemCarrinho } from '../../models/item-carrinho';
 import { CartService } from '../../services/cart.service';
 import { CheckoutService } from '../../services/checkout.service';
 import { ValuesService } from '../../services/values.service';
+import { ClientService } from '../../services/client.service';
+import { Street } from '../../models/street';
+import { Client } from '../../models/client';
 
 @Component({
   selector: 'app-checkout',
@@ -12,62 +15,84 @@ import { ValuesService } from '../../services/values.service';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
-  cartItems: ItemCarrinho[] = [];
-  total: number = 0;
+	client!: Client;
+	enderecoEntrega: any;
+	cartItems: ItemCarrinho[] = [];
+	total = 0;
+	showAllAddresses: boolean = false;
+	selectedAddressIndex: number = 0;
+	editandoEnderecos = false;
 
-  constructor(
-    private router: Router,
-    private cartService: CartService,
-    private checkoutService: CheckoutService,
-    public formatBrl: ValuesService
-  ) {
-    this.listenRouterNavigation();
-  }
+	constructor(
+	  public formatBrl: ValuesService,
+	  private clientService: ClientService,
+	  private cartService: CartService
+	) {}
 
-  ngOnInit() {
-    // Se o cartService for observable:
-    this.cartService.getCart().subscribe(cartItems => {
-      this.cartItems = cartItems;
-	  this.cartService.getTotal().subscribe(total => {
-		this.total = total;
+	ngOnInit() {
+	  this.clientService.getCliente().subscribe(cliente => {
+		this.client = cliente;
+		this.enderecoEntrega = cliente.enderecos[0];
 	  });
-			this.checkoutService.iniciarCheckout(cartItems);
 
-      // Opcional: use se tiver lógica extra no CheckoutService
-	  this.checkoutService.getDadosCheckout().subscribe(data => {
-		this.cartItems = data.cartItems;
-		this.total = data.total;
+	  this.cartService.getCart().subscribe(items => {
+		this.cartItems = items;
+		this.total = items.reduce((acc, item) => acc + item.preco * item.qtd!, 0);
 	  });
-	    });
-  }
+	}
+	openAddress() {
+		this.showAllAddresses = true;
+	  }
 
-  // Cancela checkout ao sair da aba/página
-  @HostListener('window:beforeunload', ['$event'])
-  handleBeforeUnload(event: Event) {
-    this.checkoutService.cancelarCheckout();
-  }
 
-  ngOnDestroy() {
-    this.checkoutService.cancelarCheckout();
-  }
+	  removerEndereco(index: number) {
+		const confirmRemove = confirm('Remover Este Endereço');
+		if (confirmRemove) {
+		  this.client.enderecos.splice(index, 1);
 
-  // Escuta mudanças de rota para cancelar checkout se sair do componente
-  private listenRouterNavigation() {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart && !event.url.includes('/checkout')) {
-        this.checkoutService.cancelarCheckout();
-      }
-    });
-  }
+		  if (this.selectedAddressIndex >= this.client.enderecos.length) {
+			this.selectedAddressIndex = 0;
+		  }
+		}
+	  }
 
-  removeItem(productId: number) {
-    this.cartItems = this.cartItems.filter(item => item.id !== productId);
-    this.cartService.cartSubject.next(this.cartItems); // atualiza carrinho
-    this.cartService.updateTotal(); // recalcula total
-  }
+	  salvarEndereco() {
+		const enderecoValido = this.client.enderecos.every(end =>
+		  end.rua && end.numero && end.bairro && end.cidade && end.estado && end.cep
+		);
 
-  finalizePurchase() {
-    // Aqui entraria a integração com gateway de pagamento ou backend
-    console.log('Compra Finalizada');
-  }
+		if (!enderecoValido) {
+		  alert('Preencha todos os campos dos endereços.');
+		  return;
+		}
+
+		this.editandoEnderecos = false;
+		// Aqui você pode enviar pro backend se quiser
+	  }
+			cancelarEdicao() {
+		this.editandoEnderecos = false;
+	  }
+
+	  adicionarNovoEndereco() {
+		this.client.enderecos.push({
+		  rua: '',
+		  numero: 0,
+		  bairro: '',
+		  cidade: '',
+		  estado: '',
+		  cep: ''
+		});
+		this.selectedAddressIndex = this.client.enderecos.length - 1;
+	  }
+	openWallet() {
+		throw new Error('Method not implemented.');
+	}
+
+	finalizePurchase() {
+	  alert('Compra finalizada!');
+	}
+
+	removeItem(id: number) {
+	  this.cartService.removeItem(id);
+	}
 }

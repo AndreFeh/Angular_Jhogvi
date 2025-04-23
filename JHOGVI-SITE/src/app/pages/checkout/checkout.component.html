@@ -1,35 +1,77 @@
 <div class="checkout__container">
 	<div class="left">
-	  <!-- Endereço de Entrega -->
-	  <div class="checkout_street">
-		<h2>Endereço de Entrega</h2>
-		<div>
-		  <p>Rua XYZ</p>
-		  <p>Bairro ABC</p>
-		</div>
-		<div>
-		  <p>Localidade DEF</p>
-		  <p>CEP: 12345-678</p>
-		</div>
-	  </div>
+	<!-- Endereço de Entrega -->
+	<div class="checkout_street">
+			<h2>Endereço de Entrega</h2>
 
-	  <!-- Métodos de Pagamento -->
-	  <div class="checkout_payment">
-		<h2>Métodos de Pagamento</h2>
-		<!-- Listar os métodos de pagamento aqui -->
-	  </div>
+			<div *ngIf="!editandoEnderecos">
+			  <app-address [endereco]="client.enderecos[selectedAddressIndex]"></app-address>
+			  <button (click)="editandoEnderecos = true">Alterar</button>
+			</div>
 
-	  <!-- Resumo dos Produtos -->
+			<div *ngIf="editandoEnderecos">
+			  <form>
+				<div *ngFor="let endereco of client.enderecos; let i = index" class="endereco-item">
+					<label>
+						<input
+						type="radio"
+						name="address"
+						[checked]="i === selectedAddressIndex"
+						(change)="selectedAddressIndex = i"
+						/>
+						<div class="endereco-form">
+							<input [(ngModel)]="endereco.rua" name="rua{{i}}" placeholder="Rua" required />
+							<input [(ngModel)]="endereco.numero" name="numero{{i}}" type="number" placeholder="Número" required />
+							<input [(ngModel)]="endereco.complemento" name="complemento{{i}}" placeholder="Complemento" required />
+							<input [(ngModel)]="endereco.bairro" name="bairro{{i}}" placeholder="Bairro" required />
+							<input [(ngModel)]="endereco.cidade" name="cidade{{i}}" placeholder="Cidade" required />
+							<input [(ngModel)]="endereco.estado" name="estado{{i}}" placeholder="Estado" required />
+							<input [(ngModel)]="endereco.cep" name="cep{{i}}" placeholder="CEP" required />
+							<input [(ngModel)]="endereco.referencia" name="referencia{{i}}" placeholder="Referencia" required />
+									  </div>
+						<button type="button" (click)="removerEndereco(i)">Remover</button>
+					</label>
+				</div>
+
+				<div class="address-actions">
+				  <button type="button" (click)="adicionarNovoEndereco()">+ Novo Endereço</button>
+				  <button type="button" (click)="salvarEndereco()">Salvar</button>
+				  <button type="button" (click)="cancelarEdicao()">Cancelar</button>
+				</div>
+			  </form>
+			</div>
+		  </div>
+		<!-- Métodos de Pagamento -->
+		<div class="checkout_payment">
+			<h2>Métodos de Pagamento</h2>
+			<div class="payment-options">
+			  <label>
+				<input type="radio" name="pgto" id="1" /> Pix
+			  </label>
+			  <label>
+				<input type="radio" name="pgto" id="2" /> Cartão De Débito
+			  </label>
+			  <label>
+				<input type="radio" name="pgto" id="3" /> Cartão De Crédito
+			  </label>
+			</div>
+			<button (click)="openWallet()">Ver Carteira</button>
+		  </div>
+
+	<!-- Resumo dos Produtos -->
 	  <div class="checkout_list">
 		<h2>Resumo Produtos/Ingressos</h2>
-		<app-card-resumo *ngFor="let item of cartItems"
-		  [imgProduto]="item.imagens?.[0]"
-		  [titulo]="item.titulo"
-		  [detalhes]="item.cor"
-		  [valor]="item.preco"
-		  [quantidade]="item.qtd"
-		  (itemRemoved)="removeItem(item.id)">
-		</app-card-resumo>
+		<div>
+			<app-card-resumo *ngFor="let item of cartItems"
+				[id]="item.id"
+				[imgProduto]="item.imagens?.[0]"
+				[titulo]="item.titulo"
+				[detalhes]="item.cor"
+				[valor]="item.preco"
+				[quantidade]="item.qtd"
+				(itemRemoved)="removeItem($event)">
+			</app-card-resumo>
+		</div>
 	  </div>
 	</div>
 

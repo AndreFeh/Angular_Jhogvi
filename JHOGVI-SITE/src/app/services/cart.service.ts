@@ -40,6 +40,13 @@ export class CartService {
 	  this.updateTotal(); // Atualiza o total
 	}
 
+	removeItem(id: number) {
+		this.cartItems = this.cartItems.filter(item => item.id !== id);
+		this.cartSubject.next(this.cartItems);
+		this.updateTotal();
+	  }
+
+
 	// Incrementa a quantidade de um item no carrinho
 	incrementToCart(prodId: number) {
 	  const item = this.cartItems.find(p => p.id === prodId);
