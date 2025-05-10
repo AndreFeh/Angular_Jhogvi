@@ -39,26 +39,26 @@ export class FilterComponent {
   protected onInput(event: Event) {
     this.value = (event.target as HTMLInputElement).value;
   }
-// Para produtos
-alertMessage: string = '';
-showAlert: boolean = false;
+	// Para produtos
+	alertMessage: string = '';
+	showAlert: boolean = false;
 
-showTemporaryAlert(message: string) {
-  this.alertMessage = message;
-  this.showAlert = true;
-  setTimeout(() => {
-    this.showAlert = false;
-  }, 3000); // Alerta visível por 3 segundos
-}
+	showTemporaryAlert(message: string) {
+	this.alertMessage = message;
+	this.showAlert = true;
+	setTimeout(() => {
+		this.showAlert = false;
+	}, 5000); // Alerta visível por 3 segundos
+	}
 
   // Método para aplicar filtro
   applyFilter() {
-    const filters = {
-      name: this.name,
-      type: this.type,
-	  category: this.subcategory !== 'subcategoria' ? this.subcategory : '',
-	  location: this.location !== 'estado' ? this.location : ''
-	  };
+	const filters = {
+		titulo: this.name, // se o campo se chama 'titulo' no objeto Evento
+		detalhes: this.type,
+		subcategoria: this.subcategory !== 'Subcategoria' ? this.subcategory : '',
+		localidade: this.location !== 'State' ? this.location : ''
+	};
 
     // Verifica o tipo de filtro (evento ou produto)
     if (this.filterType === 'event') {

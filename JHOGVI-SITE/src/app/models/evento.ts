@@ -8,8 +8,9 @@ export interface Evento {
 	descricao: string;
 	detalhes: string[];
 	localidade: string;
-	endereco:string;
-	local:string;
+	endereco: string;
+	local: string;
 	data: string;
 	entrada: number;
-  }
+	idProdutosVinculados: number[];
+}

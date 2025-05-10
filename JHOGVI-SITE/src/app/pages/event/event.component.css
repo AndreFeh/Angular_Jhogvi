@@ -62,21 +62,21 @@
   }
 
   .content__price{
-	/* border: 1px solid red; */
 	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
-	justify-content: flex-start;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-around;
 	margin-left: 20px;
+	height: 20%;
   }
 
-  /* .content__price > span{
+  .content__price > div{
 	color: rgb(129, 129, 129);
-	text-decoration: line-through;
+	text-decoration: none;
 	margin: 0px  10px;
 	font-size: 16px;
 
-  } */
+  }
 
   .current__price > h3{
 	font-weight: 600;
@@ -91,7 +91,6 @@
   .content__shopping{
 	/* border: 1px solid red; */
 	margin-top: 10px;
-	width: 40vw;
   }
 
   .content__shopping > ul{

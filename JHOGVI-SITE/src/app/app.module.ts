@@ -38,6 +38,7 @@ import { OrdersComponent } from './components/my-account/orders/orders.component
 import { CardResumoComponent } from './components/checkout/card-resumo/card-resumo.component';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { AlertCompraComponent } from './components/alert-compra/alert-compra.component';
 
 
 
@@ -71,6 +72,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     AddressComponent,
     OrdersComponent,
     CardResumoComponent,
+    AlertCompraComponent,
   ],
   imports: [
 	ReactiveFormsModule,

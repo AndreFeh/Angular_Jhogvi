@@ -4,9 +4,12 @@ import { ValuesService } from '../../services/values.service';
 import { ProdutoCarrinho } from '../../models/produto-carrinho';
 import { Evento } from '../../models/evento';
 import { eventos } from '../../data/data';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventoCarrinho } from '../../models/evento-carrinho';
 import { ItemCarrinho } from '../../models/item-carrinho';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertCompraComponent } from '../../components/alert-compra/alert-compra.component';
+
 
 @Component({
   selector: 'app-event',
@@ -21,7 +24,9 @@ export class EventComponent {
 	constructor(
 	  private route: ActivatedRoute,
 	  private cartService: CartService,
-	  public formatBrl: ValuesService
+	  public formatBrl: ValuesService,
+	  private dialog: MatDialog,
+	  private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -59,6 +64,24 @@ export class EventComponent {
 		tipo: 'evento'
 	  };
 
-	  this.cartService.addToCart(item);
+
+	  /*Implementar algo para abrir outro component como se fosse um Alert informando para comprar um produto
+	  tendo um OK e um Me encaminhe ao produto, e nessa parte, quando OK fecha esse subcomponent e quando o 2° opt,
+	  */
+	const dialogRef = this.dialog.open(AlertCompraComponent, {
+		minWidth: '60vw',
+		minHeight: '70vh',
+
+		data: { eventoId: this.event.id??[] }  // Substitua com o ID real do produto
+	});
+
+	dialogRef.afterClosed().subscribe(result => {
+		if (result?.redirectToProductId) {
+			// Redirecionar ao produto
+			this.router.navigate(['/produto', result.redirectToProductId]);  // Substitua com o ID real
+		} else {
+			return
+		}
+		});
 	}
-  }
+}

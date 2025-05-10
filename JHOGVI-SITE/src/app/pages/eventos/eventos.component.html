@@ -1,44 +1,49 @@
-<div *ngIf="showFeedback" class="feedback-box">
-	{{ feedbackMessage }}
-  </div>
 
-  <div class="eventos__container">
+<div class="eventos__container">
 	<div class="events_filter">
-	  <!-- Filtro de Eventos -->
-	  <app-filter
+		<!-- Filtro de Eventos -->
+		<app-filter
 		[filterType]="'event'"
-		(filter)="applyFilters($event)"
-		(clear)="clearFilters()"
+		[subcategoryTitle]="'Subcategoria'"
+		[typeTitle]="'Tipo'"
+		[locationTitle]="'Localidade'"
+		[nameTitle]="'Nome do Evento'"
+		[typeOptions]="typeOptions|| []"
 		[subcategoryOptions]="opcoesSubcategorias"
 		[locationOptions]="opcoesLocalidades"
-		[typeOptions]="typeOptions || []"
-		[subcategoryTitle]="'Subcategoria'"
-		[locationTitle]="'Estado'"
-		[typeTitle]="'Tipo'"
-		[nameTitle]="'Nome'"
+		[nameOptions]="nameOptions"
+		(filter)="applyFilters($event)"
+		(clear)="clearFilters()"
 		[feedbackMessage]="feedbackMessage"
 		[showFeedback]="showFeedback"
-	  />
+  		/>
 	</div>
+<div>
 
-	<div class="events_cards" *ngIf="filteredEvents.length !== 0">
-	  <h1>Eventos</h1>
-	  <!-- Cards dos Eventos -->
-	  <app-card-event *ngFor="let event of filteredEvents"
-		[id]="event.id"
-		[title]="event.titulo"
-		[imgEvent]="event.imagens[0]"
-		[subcategoria]="event.subcategoria"
-		[local]="event.local"
-		[city]="event.localidade"
-		[street]="event.endereco"
-		[date]="event.data"
-		[price]="event.entrada"
-	  />
-	</div>
+</div>
+	<div class="events_cards">
+		<h1>Eventos</h1>
+		<!-- <div *ngIf="showFeedback" class="feedback-box">
+			{{ feedbackMessage }}
+		</div> -->
+		<div *ngIf="filteredEvents.length !== 0; else noEvents">
+			<!-- Cards dos Eventos -->
+			<app-card-event
+			  *ngFor="let event of filteredEvents"
+			  [id]="event.id"
+			  [title]="event.titulo"
+			  [imgEvent]="event.imagens[0]"
+			  [subcategoria]="event.subcategoria"
+			  [local]="event.local"
+			  [city]="event.localidade"
+			  [street]="event.endereco"
+			  [date]="event.data"
+			  [price]="event.entrada"
+			/>
+		  </div>
 
-	<!-- Caso não haja eventos filtrados -->
-	<div *ngIf="filteredEvents.length === 0">
-	  <p>Nenhum resultado encontrado.</p>
+		  <ng-template #noEvents>
+			<p>Nenhum resultado encontrado.</p>
+		  </ng-template>
 	</div>
-  </div>
+</div>

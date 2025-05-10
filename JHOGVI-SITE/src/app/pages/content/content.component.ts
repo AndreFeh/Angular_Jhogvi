@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { produtos, Produto } from '../../data/data';
+import { Produto } from '../../models/produto';
 import { CartService } from '../../services/cart.service';
 import { ValuesService } from '../../services/values.service';
 import { ItemCarrinho } from '../../models/item-carrinho';
 import { ParsePrecoPipe } from '../../shared/parse-preco.pipe';
+import { produtos } from '../../data/data';
 
 @Component({
   selector: 'app-content',
@@ -72,5 +73,9 @@ export class ContentComponent implements OnInit {
 
     this.cartService.addToCart(item);
     console.log(`${this.produto.titulo} foi adicionado ao carrinho!`);
+  }
+
+  comprarProduto(){
+
   }
 }

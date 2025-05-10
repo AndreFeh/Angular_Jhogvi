@@ -10,8 +10,10 @@ export class FilterService {
 		return events.filter(event => {
 		  return (!filters.name || event.titulo.toLowerCase().includes(filters.name.toLowerCase())) &&
 				 (!filters.type || event.subcategoria.toLowerCase().includes(filters.type.toLowerCase())) &&
-				 (!filters.category || event.categoria === filters.category) &&
-				 (!filters.location || event.local.toLowerCase().includes(filters.location.toLowerCase()));
+				//  (!filters.category || event.categoria === filters.category) &&
+				 (!filters.location || event.localidade.toLowerCase().includes(filters.location.toLowerCase()));
+				 console.log('Aplicando filtros em:', filters);
+
 		});
 	  }	filterProducts(products: Produto[], filters: any): Produto[] {
 		return products.filter(product => {

@@ -7,5 +7,6 @@ export interface Produto {
 	descricao?: string[];
 	detalhes: string[];
 	preco: number;
-	qtd?: number; // opcional, só aparece no carrinho
+	qtd?: number;
+	link?:string;
 }

@@ -15,12 +15,14 @@ const routes: Routes = [
 	{path:'produtos', component:ProductsComponent, pathMatch:'prefix'},
 	{path:'produto/:id', component:ContentComponent, pathMatch:'prefix'},
 	{path:'carrinho', component:ShoppingCartComponent, pathMatch:'prefix'},
-	{path:'checkout', component:CheckoutComponent, pathMatch:'prefix'},
 	{path:'minha-conta', component:MyAccountComponent, pathMatch:'prefix'},
 	{path:'suporte', component:CostumerSupportComponent, pathMatch:'prefix'},
 	{path:'eventos', component:EventosComponent, pathMatch:'prefix'},
 	{path:'event/:id', component:EventComponent, pathMatch:'prefix'},
 	{path:'**', redirectTo:''}
+
+	// {path:'checkout', component:CheckoutComponent, pathMatch:'prefix'},
+
 ];
 
 @NgModule({

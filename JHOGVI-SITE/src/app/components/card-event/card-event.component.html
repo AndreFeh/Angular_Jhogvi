@@ -9,7 +9,7 @@
 			<h4 class="city">Localizado em {{city}}</h4>
 			<span class="street">Endereço: {{street}}</span>
 			<div class="valor">
-				<h3 *ngIf="price<=0">Entrada Gratuita</h3>
+				<h3 *ngIf="price<=0">Entrada Gratuita para Primeiras Compras</h3>
 				<span *ngIf="price>0"><strong>Ingresso: </strong> R$ {{formatBrl.formatBrl(price)}}</span>
 
 			</div>

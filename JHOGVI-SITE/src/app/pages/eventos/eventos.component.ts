@@ -12,6 +12,7 @@ import { ValuesService } from '../../services/values.service';
 export class EventosComponent {
 	events: Evento[] = [];
 	filteredEvents: Evento[] = [];
+	nameOptions: string[]=[];
 	opcoesSubcategorias: string[] = [];
 	opcoesLocalidades: string[] = [];
 	showFeedback: boolean = false;
@@ -37,9 +38,10 @@ export class EventosComponent {
 
 	// Carrega as opções únicas para os filtros
 	private loadFilterOptions() {
-	  this.opcoesSubcategorias = this.getUniqueField('subcategoria');
-	  this.opcoesLocalidades = this.getUniqueField('localidade');
-	  this.typeOptions = this.getUniqueField('detalhes'); // ou outro campo, dependendo do seu objetivo
+		this.nameOptions = this.getUniqueField('titulo'); // <-- Adicione isso
+		this.opcoesSubcategorias = this.getUniqueField('subcategoria');
+		this.opcoesLocalidades = this.getUniqueField('localidade');
+		this.typeOptions = this.getUniqueField('detalhes'); // ou outro campo, dependendo do seu objetivo
 	}
 
 	// Retorna valores únicos de um campo específico dos eventos
@@ -52,15 +54,16 @@ export class EventosComponent {
 
 	// Aplica os filtros nos eventos
 	applyFilters(filters: any) {
-	  this.filteredEvents = this.filterService.filterEvents(this.events, filters);
+		console.log('Filtros Recebidos: ', filters);
+	 	this.filteredEvents = this.filterService.filterEvents(this.events, filters);
 
-	  // Feedback de filtro
-	  this.showFeedback = true;
-	  this.feedbackMessage = this.filteredEvents.length
-		? '✅ Filtros Aplicados!'
-		: '❌ Nenhum Item Encontrado.';
+		// Feedback de filtro
+		this.showFeedback = true;
+		this.feedbackMessage = this.filteredEvents.length
+			? '✅ Filtros Aplicados!'
+			: '❌ Nenhum Item Encontrado.';
 
-	  setTimeout(() => (this.showFeedback = false), 3000);
+		setTimeout(() => (this.showFeedback = false), 5000);
 	}
 
 	// Limpa todos os filtros e restaura os eventos
@@ -70,6 +73,6 @@ export class EventosComponent {
 	  this.feedbackMessage = '❌ Filtros removidos!';
 	  this.showFeedback = true;
 
-	  setTimeout(() => (this.showFeedback = false), 3000);
+	  setTimeout(() => (this.showFeedback = false), 5000);
 	}
   }

@@ -117,3 +117,12 @@ mat-label{
 .cdk-overlay-container {
 	z-index: 1000 !important; /* Garante que o dropdown apareça acima de tudo */
 }
+
+.alert-box{
+	margin: 20px 00px;
+	font-size: 16px;
+	font-weight: 600;
+	text-shadow: gray 2px 2px 2px;
+}
+
+.mat-elevation-z4 .alert-content{	padding: 20px;}
