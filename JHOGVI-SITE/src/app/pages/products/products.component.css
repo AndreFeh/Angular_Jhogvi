@@ -1,3 +1,4 @@
+
 .products__container{
 	display: flex;
 	flex-direction: row;
@@ -8,13 +9,14 @@
 }
 
 .products_filter{
-	min-width: 20%;
-	display: flex;
+	display: flex;	flex: 1 1 20%;
+
 	/* border: 1px solid red; */
 	flex-direction: row;
 }
 
 .products_cards{
+		flex: 1 1 75%;
 
 	display: flex;
 	flex-direction: column;
@@ -22,15 +24,15 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	width: 68%;
+	width: 77vw;
 	border-radius: 15px;
-	border: 3px solid silver;
+	border: 3px solid green;
 	padding: 15px 0px;
 
 }
 
 .products_cards>h1{
-	margin-bottom: 15px;
+	padding: 20px;
 	margin-left: 15px;
 }
 

@@ -14,7 +14,7 @@
 	/*width: 98vw; */
 	width: 100%;
 	background-color: black;
-	border-bottom: 2px solid white;
+	border-bottom: 4px solid rgb(3, 85, 0);
 }
 
 /* .menu__container.fixed {
