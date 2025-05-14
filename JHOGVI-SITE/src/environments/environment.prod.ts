@@ -1,5 +1,5 @@
 export const environment = {
-	production: true,  // Indicando que este é o ambiente de produção
-	apiUrl: 'https://jhogvi.com.br',  // Use uma URL de staging ou uma URL fictícia temporária
+	production: true,//Indicando que este é o ambiente de produção
+	apiUrl: 'https://api.jhogvi.com.br', // se for usar subdomínio para receber o backend API
 	otherSetting: 'productionValue',
-  };
+};
